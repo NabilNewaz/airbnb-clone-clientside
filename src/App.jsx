@@ -1,12 +1,13 @@
-import Navbar from "./Components/Navbar"
+import { RouterProvider } from "react-router-dom"
+import router from "./Routes/Routes"
 
 function App() {
   return (
-    <div className="mx-auto">
-      <div className="border-b">
-        <Navbar></Navbar>
-      </div>
-    </div>
+    <>
+      <>
+        <RouterProvider router={router}></RouterProvider>
+      </>
+    </>
   )
 }
 

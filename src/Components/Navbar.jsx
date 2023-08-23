@@ -25,7 +25,9 @@ const Navbar = () => {
                 <div>
                     <div className="flex flex-row items-center justify-between">
                         <div className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer text-[#585858]">Airbnb your home</div>
-                        <div className="hidden md:block text-sm font-bold py-3 px-3 rounded-full hover:bg-neutral-100 transition cursor-pointer text-[#585858] mr-2"><TbWorld className='text-xl'></TbWorld></div>
+                        <div className="hidden md:block text-sm font-bold py-3 px-3 rounded-full hover:bg-neutral-100 transition cursor-pointer text-[#585858] mr-2">
+                            <TbWorld className='text-xl'></TbWorld>
+                        </div>
                         <div onClick={() => setUserMenuToggle(!userMenuToggle)} className=" p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition duration-300">
                             <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"></path>
@@ -38,18 +40,17 @@ const Navbar = () => {
                     <div>
                         <div className={userMenuToggle ? 'absolute z-10 right-20 mt-2 w-56 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none' : 'hidden'} role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
                             <div className="py-1" role="none">
-                                <a href="#" className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0">Account settings</a>
-                                <a href="#" className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-1">Support</a>
-                                <a href="#" className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-2">License</a>
-                                <form method="POST" action="#" role="none">
-                                    <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" tabIndex="-1" id="menu-item-3">Sign out</button>
-                                </form>
+                                <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 font-semibold mt-1 py-3" role="menuitem" tabIndex="-1" id="menu-item-0">Sign up</a>
+                                <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 py-3 mb-2" role="menuitem" tabIndex="-1" id="menu-item-0">Login</a>
+                                <hr />
+                                <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 mt-2 py-3" role="menuitem" tabIndex="-1" id="menu-item-0">Airbnb your home</a>
+                                <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 py-3 mb-1" role="menuitem" tabIndex="-1" id="menu-item-0">Help Center</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
