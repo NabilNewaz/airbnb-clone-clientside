@@ -8,14 +8,14 @@ const CardOption = () => {
         setIsChecked(!isChecked)
     }
     return (
-        <div className='flex mt-5 p-4 border rounded-xl items-center w-[55%] justify-between'>
-            <div className='flex'>
-                <p className='border-r-[1px] pr-4 font-semibold'>Display total price</p>
-                <p className='pl-4 text-gray-500'>Includes all fees, before taxes</p>
+        <div className='flex mt-5 p-4 border rounded-xl items-center lg:w-[55%] md:w-[100%] md:mx-10 lg:mx-0 mx-5 gap-7 md:gap-0 justify-between'>
+            <div className='md:flex'>
+                <p className='md:border-r-[1px] pr-4 font-semibold'>Display total price</p>
+                <p className='md:pl-4 text-gray-500'>Includes all fees, before taxes</p>
             </div>
             <div>
                 <label className='flex cursor-pointer select-none items-center'>
-                    <div className='relative'>
+                    <div className='relative -z-50'>
                         <input
                             type='checkbox'
                             checked={isChecked}

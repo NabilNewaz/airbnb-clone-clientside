@@ -1,0 +1,22 @@
+/* Yellow Range Slider */
+  #range-slider .range-slider__range {
+    background: #000000;
+    transition: height 0.3s;
+  }
+  
+  #range-slider .range-slider__thumb {
+    background: #fff;
+    box-shadow : 0px 7px 10px #00000036;
+    border: 1px solid rgb(203 213 225);
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s;
+  }
+  
+  #range-slider .range-slider__thumb[data-active] {
+    transform: translate(-50%, -50%) scale(1.17);
+  }
+  
+  #range-slider .range-slider__range[data-active] {
+    height: 10px;
+  }

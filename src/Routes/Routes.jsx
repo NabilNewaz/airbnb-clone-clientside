@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom"
 import Layout from "../Layout/Layout";
 
 const router = createBrowserRouter([
@@ -8,11 +8,15 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Navigate to="/" />
+                element: <Layout></Layout>
             },
             {
                 path: '/category/:category_id',
-                element: <Navigate to="/" />
+                element: <Layout></Layout>
+            },
+            {
+                path: '/search',
+                element: <Layout></Layout>
             }
         ],
     }
