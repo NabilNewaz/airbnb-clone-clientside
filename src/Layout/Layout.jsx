@@ -21,7 +21,7 @@ const Layout = () => {
             </div>
             <div className={isBackdrop ? 'fixed top-0' : "sticky z-10 top-[82px] bg-white"}>
                 <div className={scrollY > 5 ? 'sticky top-[82px] z-10 bg-white shadow-md' : 'sticky top-[82px] bg-white shadow-md md:shadow-none'}>
-                    <Categories modalOpen={modalOpen} setModalOpen={setModalOpen} cards={cards} setCards={setCards}></Categories>
+                    <Categories modalOpen={modalOpen} setModalOpen={setModalOpen} cards={cards} setCards={setCards} isLoading={isLoading} setIsLoading={setIsLoading}></Categories>
                 </div>
             </div>
             <div>

@@ -58,8 +58,8 @@ const Navbar = ({ isBackdrop, setIsBackdrop, modalOpen, setModalOpen, cards, set
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const form = event.target;
-        const address = form.address.value
+        const form = event?.target;
+        const address = form?.address?.value
         const searchData = {
             address: address,
             check_in: value?.startDate,

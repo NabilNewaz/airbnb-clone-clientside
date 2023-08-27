@@ -17,6 +17,10 @@ const router = createBrowserRouter([
             {
                 path: '/search',
                 element: <Layout></Layout>
+            },
+            {
+                path: '/filter',
+                element: <Layout></Layout>
             }
         ],
     }

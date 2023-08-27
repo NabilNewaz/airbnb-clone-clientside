@@ -43,7 +43,7 @@ const CardView = ({ cards, setCards, isLoading, setIsLoading }) => {
                 <p className='text-xl font-semibold text-gray-500'>No Data Found</p>
             </div>
             <div className='lg:mx-20 md:mx-10 mt-6 grid grid-cols-1 lg:grid-cols-5 md:grid-cols-2 gap-x-6 gap-y-10 overflow-x-hidden lg:mb-20 md:mb-28 place-items-center'>
-                {!isLoading && cards?.map((card, index) =>
+                {cards?.map((card, index) =>
                     <Card key={index} data={card}></Card>
                 )}
                 {isLoading && Array.apply(null, { length: 20 }).map((e, i) => (
