@@ -46,7 +46,6 @@ const Categories = ({ modalOpen, setModalOpen, setCards }) => {
         axios.get(`http://localhost:5000/get-all-cards`)
             .then(response => {
                 setFilterData(response.data);
-                console.log(response.data)
             })
             .catch(error => {
                 console.error(error);
