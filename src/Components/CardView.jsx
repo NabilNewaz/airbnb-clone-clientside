@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import axios from 'axios';
+
 import CardOption from './CardOption';
 import Card from './Card';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 
 const CardView = ({ cards, setCards, isLoading, setIsLoading }) => {
     const param = useParams()
     const navigate = useNavigate();
+
     useEffect(() => {
         if (!param?.category_id) {
             navigate('/category/64e64b584e28034a6064ec41')

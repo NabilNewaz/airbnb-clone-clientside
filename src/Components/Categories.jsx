@@ -1,19 +1,26 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
+
+import useSmoothHorizontalScroll from 'use-smooth-horizontal-scroll';
+import RangeSlider from "react-range-slider-input";
+
+import { BsDashLg } from "react-icons/bs";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { LuSettings2 } from "react-icons/lu";
-import useSmoothHorizontalScroll from 'use-smooth-horizontal-scroll';
 import { RxCross2 } from "react-icons/rx";
-import RangeSlider from "react-range-slider-input";
+
 import "react-range-slider-input/dist/style.css";
 import "./styles.css";
-import { BsDashLg } from "react-icons/bs";
 
-const Categories = ({ modalOpen, setModalOpen }) => {
+const Categories = ({ modalOpen, setModalOpen, setCards }) => {
+    const navigate = useNavigate()
+
+    const { scrollContainerRef, handleScroll, scrollTo, isAtStart, isAtEnd } = useSmoothHorizontalScroll();
+
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const { scrollContainerRef, handleScroll, scrollTo, isAtStart, isAtEnd } = useSmoothHorizontalScroll();
     const [filterData, setFilterData] = useState();
 
     const [selectedType, setSellectedType] = useState(0)
@@ -36,33 +43,33 @@ const Categories = ({ modalOpen, setModalOpen }) => {
     }, [])
 
     const handleModalOpenData = () => {
-        console.log('hello')
         axios.get(`http://localhost:5000/get-all-cards`)
-        .then(response => {
-            setFilterData(response.data);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+            .then(response => {
+                setFilterData(response.data);
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
 
     useEffect(() => {
         const filterData = {
-            type : selectedType,
-            range : value,
-            bed : selectedBeds,
-            beedroom : selectedBedroom,
-            barthroom : selectedBathrooms,
-            propertyType : selectedPropertyTypes
+            type: selectedType,
+            range: value,
+            bed: selectedBeds,
+            bedroom: selectedBedroom,
+            bathroom: selectedBathrooms,
+            propertyType: selectedPropertyTypes
         }
 
         axios.post(`http://localhost:5000/filter`, filterData)
-        .then(response => {
-            setFilterData(response.data);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+            .then(response => {
+                setFilterData(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }, [selectedType, selectedBeds, value[0], value[1], selectedBathrooms, selectedBedroom, selectedPropertyTypes])
 
     return (
@@ -196,7 +203,7 @@ const Categories = ({ modalOpen, setModalOpen }) => {
                         <div className='sticky bottom-0 grid grid-cols-2 items-center bg-white pt-4 border-t pb-3 rounded-b-xl'>
                             <div className='cursor-pointer font-semibold py-2 mx-5 underline hover:bg-gray-100 w-fit hover:rounded-xl hover:px-3 hover:mx-2'>Clear All</div>
                             <div>
-                                <button className='float-right px-5 mb-1 bg-black text-white font-bold py-3 rounded-lg mx-5 '>Show {filterData?.length} places</button>
+                                <button onClick={() => { setCards(filterData); setModalOpen(!modalOpen); navigate('/filter'); }} className='float-right px-5 mb-1 bg-black text-white font-bold py-3 rounded-lg mx-5 '>Show {filterData?.length} places</button>
                             </div>
                         </div>
                     </div>
@@ -225,17 +232,17 @@ const Categories = ({ modalOpen, setModalOpen }) => {
                             </div>
 
                             <div className='mx-5 md:w-100  border rounded-xl flex justify-around mt-5 mb-6'>
-                                <div onClick={() => setSellectedType(1)} className={`cursor-pointer py-4 w-full border-r flex flex-col text-center ${selectedType == 1 ? 'bg-gradient-to-b from-[#3e3e3e] via-[#3b3b3b] to-[#202020] rounded-l-xl shadow-inner shadow-black' : ''}`}>
-                                    <span className={`${selectedType == 1 ? 'text-white' : 'text-black'} text-sm font-bold`}>Any Type</span>
-                                    <span className={`${selectedType == 1 ? 'text-gray-300' : 'text-gray-500'} text-sm`}>$107 avg.</span>
+                                <div onClick={() => setSellectedType('any type')} className={`cursor-pointer py-4 w-full border-r flex flex-col text-center ${selectedType == 'any type' ? 'bg-gradient-to-b from-[#3e3e3e] via-[#3b3b3b] to-[#202020] rounded-l-xl shadow-inner shadow-black' : ''}`}>
+                                    <span className={`${selectedType == 'any type' ? 'text-white' : 'text-black'} text-sm font-bold`}>Any Type</span>
+                                    <span className={`${selectedType == 'any type' ? 'text-gray-300' : 'text-gray-500'} text-sm`}>$107 avg.</span>
                                 </div>
-                                <div onClick={() => setSellectedType(2)} className={`cursor-pointer py-4 w-full border-r flex flex-col text-center ${selectedType == 2 ? 'bg-gradient-to-b from-[#3e3e3e] via-[#3b3b3b] to-[#202020] shadow-inner shadow-black' : ''}`}>
-                                    <span className={`${selectedType == 2 ? 'text-white' : 'text-black'} text-sm font-bold`}>Room</span>
-                                    <span className={`${selectedType == 2 ? 'text-gray-300' : 'text-gray-500'} text-sm`}>$56 avg.</span>
+                                <div onClick={() => setSellectedType('room')} className={`cursor-pointer py-4 w-full border-r flex flex-col text-center ${selectedType == 'room' ? 'bg-gradient-to-b from-[#3e3e3e] via-[#3b3b3b] to-[#202020] shadow-inner shadow-black' : ''}`}>
+                                    <span className={`${selectedType == 'room' ? 'text-white' : 'text-black'} text-sm font-bold`}>Room</span>
+                                    <span className={`${selectedType == 'room' ? 'text-gray-300' : 'text-gray-500'} text-sm`}>$56 avg.</span>
                                 </div>
-                                <div onClick={() => setSellectedType(3)} className={`cursor-pointer py-4 w-full text-center flex flex-col ${selectedType == 3 ? 'bg-gradient-to-b from-[#3e3e3e] via-[#3b3b3b] to-[#202020] rounded-r-xl shadow-inner shadow-black' : ''}`}>
-                                    <span className={`${selectedType == 3 ? 'text-white' : 'text-black'} text-sm font-bold`}>Entire Home</span>
-                                    <span className={`${selectedType == 3 ? 'text-gray-300' : 'text-gray-500'} text-sm`}>$120 avg.</span>
+                                <div onClick={() => setSellectedType('entire home')} className={`cursor-pointer py-4 w-full text-center flex flex-col ${selectedType == 'entire home' ? 'bg-gradient-to-b from-[#3e3e3e] via-[#3b3b3b] to-[#202020] rounded-r-xl shadow-inner shadow-black' : ''}`}>
+                                    <span className={`${selectedType == 'entire home' ? 'text-white' : 'text-black'} text-sm font-bold`}>Entire Home</span>
+                                    <span className={`${selectedType == 'entire home' ? 'text-gray-300' : 'text-gray-500'} text-sm`}>$120 avg.</span>
                                 </div>
                             </div>
                             <div className='mt-4 mx-5 border-t'>
@@ -310,19 +317,19 @@ const Categories = ({ modalOpen, setModalOpen }) => {
                                 <p className='text-xl font-bold mt-5'>Property types</p>
                             </div>
                             <div className='grid md:grid-cols-4 grid-cols-2 gap-4'>
-                                <div onClick={() => setSellectedPropertyTypes(1)} className={selectedPropertyTypes == 1 ? 'mt-5 border p-4 rounded-xl w-40 border-2 border-black cursor-pointer bg-gray-100' : 'mt-5 border p-4 rounded-xl w-40 hover:border hover:border-black cursor-pointer'}>
+                                <div onClick={() => setSellectedPropertyTypes('house')} className={selectedPropertyTypes == 'house' ? 'mt-5 border p-4 rounded-xl w-40 border-2 border-black cursor-pointer bg-gray-100' : 'mt-5 border p-4 rounded-xl w-40 hover:border hover:border-black cursor-pointer'}>
                                     <img width='35' src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg" alt="" />
                                     <p className='font-semibold mt-8'>House</p>
                                 </div>
-                                <div onClick={() => setSellectedPropertyTypes(2)} className={selectedPropertyTypes == 2 ? 'mt-5 border p-4 rounded-xl w-40 border-2 border-black cursor-pointer bg-gray-100' : 'mt-5 border p-4 rounded-xl w-40 hover:border hover:border-black cursor-pointer'}>
+                                <div onClick={() => setSellectedPropertyTypes('apartment')} className={selectedPropertyTypes == 'apartment' ? 'mt-5 border p-4 rounded-xl w-40 border-2 border-black cursor-pointer bg-gray-100' : 'mt-5 border p-4 rounded-xl w-40 hover:border hover:border-black cursor-pointer'}>
                                     <img width='35' src="https://a0.muscache.com/pictures/21cfc7c9-5457-494d-9779-7b0c21d81a25.jpg" alt="" />
                                     <p className='font-semibold mt-8'>Apartment</p>
                                 </div>
-                                <div onClick={() => setSellectedPropertyTypes(3)} className={selectedPropertyTypes == 3 ? 'border p-4 rounded-xl w-40 border-2 border-black cursor-pointer bg-gray-100' : 'border p-4 rounded-xl w-40 hover:border hover:border-black cursor-pointer'}>
+                                <div onClick={() => setSellectedPropertyTypes('guesthouse')} className={selectedPropertyTypes == 'guesthouse' ? 'border p-4 rounded-xl w-40 border-2 border-black cursor-pointer bg-gray-100' : 'border p-4 rounded-xl w-40 hover:border hover:border-black cursor-pointer'}>
                                     <img width='35' src="https://a0.muscache.com/pictures/6f261426-2e47-4c91-8b1a-7a847da2b21b.jpg" alt="" />
                                     <p className='font-semibold mt-8'>Guesthouse</p>
                                 </div>
-                                <div onClick={() => setSellectedPropertyTypes(4)} className={selectedPropertyTypes == 4 ? 'border p-4 rounded-xl w-40 border-2 border-black cursor-pointer bg-gray-100' : 'border p-4 rounded-xl w-40 hover:border hover:border-black cursor-pointer'}>
+                                <div onClick={() => setSellectedPropertyTypes('hotel')} className={selectedPropertyTypes == 'hotel' ? 'border p-4 rounded-xl w-40 border-2 border-black cursor-pointer bg-gray-100' : 'border p-4 rounded-xl w-40 hover:border hover:border-black cursor-pointer'}>
                                     <img width='35' src="https://a0.muscache.com/pictures/64b27fed-56a1-4f03-950a-d8da08efb428.jpg" alt="" />
                                     <p className='font-semibold mt-8'>Hotel</p>
                                 </div>
@@ -331,7 +338,7 @@ const Categories = ({ modalOpen, setModalOpen }) => {
                         <div className='sticky bottom-0 grid grid-cols-2 items-center bg-white pt-4 border-t pb-3 rounded-b-xl'>
                             <div className='cursor-pointer font-semibold py-2 ml-5 w-fit underline hover:bg-gray-100 hover:rounded-xl hover:px-3 hover:mx-2'>Clear All</div>
                             <div className=''>
-                                <button className='float-left px-5 mb-1 bg-black text-white font-bold py-3 rounded-lg'>Show 648 places</button>
+                                <button onClick={() => { setCards(filterData); setModalOpen(!modalOpen); navigate('/filter'); }} className='float-left px-5 mb-1 bg-black text-white font-bold py-3 rounded-lg'>Show {filterData?.length} places</button>
                             </div>
                         </div>
                     </div>
@@ -365,7 +372,7 @@ const Categories = ({ modalOpen, setModalOpen }) => {
                         <MdKeyboardArrowRight className='text-2xl'></MdKeyboardArrowRight>
                     </button>
                     <div className='border rounded-lg md:block hidden'>
-                        <button onClick={() => {setModalOpen(!modalOpen); handleModalOpenData();} } className='flex items-center gap-2 px-4 py-3'>
+                        <button onClick={() => { setModalOpen(!modalOpen); handleModalOpenData(); }} className='flex items-center gap-2 px-4 py-3'>
                             <LuSettings2></LuSettings2>
                             <span>Filters</span>
                         </button>

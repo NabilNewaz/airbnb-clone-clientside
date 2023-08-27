@@ -1,17 +1,31 @@
-import dayjs from 'dayjs';
 import React, { useState } from 'react';
-import { FaSearch } from "react-icons/fa";
-import { TbWorld } from "react-icons/tb";
-import Datepicker from "react-tailwindcss-datepicker";
-import { LuSettings2 } from "react-icons/lu";
-import { RxCross2 } from "react-icons/rx";
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ isBackdrop, setIsBackdrop, modalOpen, setModalOpen, cards, setCards }) => {
+import axios from 'axios';
+import Datepicker from "react-tailwindcss-datepicker";
+
+import { FaSearch } from "react-icons/fa";
+import { TbWorld } from "react-icons/tb";
+import { LuSettings2 } from "react-icons/lu";
+import { RxCross2 } from "react-icons/rx";
+
+const Navbar = ({ isBackdrop, setIsBackdrop, modalOpen, setModalOpen, setCards }) => {
     const [userMenuToggle, setUserMenuToggle] = useState(false);
     const [openSearch, setOpenSearch] = useState(false)
     const [isExpand, setIsExpand] = useState(0)
+    const [isSearchClick, setSearchClick] = useState(0)
+    const [value, setValue] = useState({});
+
+    const [dateMoueHover, setDateMouseHover] = useState();
+    const [enddateMoueHover, setEndDateMouseHover] = useState();
+
+    const [adults, setAdults] = useState(0);
+    const [children, setchildren] = useState(0);
+    const [infants, setInfants] = useState(0);
+    const [pets, setPets] = useState(0);
+
+    const navigate = useNavigate();
+
     const handleSearchForm = () => {
         setIsBackdrop(!isBackdrop)
         setAdults(0);
@@ -32,21 +46,10 @@ const Navbar = ({ isBackdrop, setIsBackdrop, modalOpen, setModalOpen, cards, set
         setOpenSearch(false);
         // document.getElementsByClassName('absolute right-0 h-full px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed')[0].classList.add('hidden')
     }
-    const navigate = useNavigate();
-    const [isSearchClick, setSearchClick] = useState(0)
-    const [value, setValue] = useState({});
 
     const handleValueChange = (newValue) => {
         setValue(newValue);
     }
-
-    const [dateMoueHover, setDateMouseHover] = useState();
-    const [enddateMoueHover, setEndDateMouseHover] = useState();
-
-    const [adults, setAdults] = useState(0);
-    const [children, setchildren] = useState(0);
-    const [infants, setInfants] = useState(0);
-    const [pets, setPets] = useState(0);
 
     const handleClear = () => {
         setAdults(0);

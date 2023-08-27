@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { BsCheck2 } from "react-icons/bs";
 
 const CardOption = () => {
@@ -7,6 +8,7 @@ const CardOption = () => {
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked)
     }
+
     return (
         <div className='flex mt-5 p-4 border rounded-xl items-center lg:w-[55%] md:w-[100%] md:mx-10 lg:mx-0 mx-5 gap-7 md:gap-0 justify-between'>
             <div className='md:flex'>

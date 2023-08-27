@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+
+import { useScrollYPosition } from 'react-use-scroll-position';
+
 import Navbar from '../Components/Navbar';
 import Categories from '../Components/Categories';
 import CardView from '../Components/CardView';
-import { useScrollYPosition } from 'react-use-scroll-position';
 import Footer from '../Components/Footer';
 
 
 const Layout = () => {
     const scrollY = useScrollYPosition();
+
     const [isBackdrop, setIsBackdrop] = useState(false)
     const [modalOpen, setModalOpen] = useState(false);
     const [cards, setCards] = useState([]);
